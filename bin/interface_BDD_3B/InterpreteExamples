@@ -1,0 +1,68 @@
+Nécéssaire -> Critère Numérique -- nombre d'enfants -> > 3
+	 
+SELECT Distinct pk_personne_id
+FROM personne, enfant 
+WHERE enfant.fk_personne_id=pk_personne_id
+AND CAST(enfant.rang as int)>3
+ORDER by pk_personne_id
+
+
+
+
+
+Nécéssaire -> Épisode -- travail -> Pèriode -- âge -> contient 14:16
+
+SELECT Distinct pk_personne_id
+FROM personne, professionnal_episode
+WHERE professionnal_episode.fk_personne_id=pk_personne_id 
+	AND ((cast(professionnal_episode.date_debut as int)-cast(personne.annee_naissance as int)<=14)
+			AND(cast(professionnal_episode.date_fin as int)-cast(personne.annee_naissance as int)>=14)
+		OR (cast(professionnal_episode.date_debut as int)-cast(personne.annee_naissance as int)<=16)
+			AND(cast(professionnal_episode.date_fin as int)-cast(personne.annee_naissance as int)>=16))
+order by pk_personne_id
+
+
+Nécéssaire -> Critère Numérique -- nombre d'enfants -> > 3
+Nécéssaire -> Épisode -- travail -> Pèriode -- âge -> contient 14:16
+
+"SELECT Distinct pk_personne_id"
+				+ "FROM personne, professionnal_episode, enfant"
+				+ "WHERE professionnal_episode.fk_personne_id=pk_personne_id AND enfant.fk_personne_id=pk_personne_id "
+				+ "	AND ((cast(professionnal_episode.date_debut as int)-cast(personne.annee_naissance as int)<=14)"
+				+ "			AND(cast(professionnal_episode.date_fin as int)-cast(personne.annee_naissance as int)>=14)"
+				+ "		OR (cast(professionnal_episode.date_debut as int)-cast(personne.annee_naissance as int)<=16)"
+				+ "			AND(cast(professionnal_episode.date_fin as int)-cast(personne.annee_naissance as int)>=16))"
+				+ "	AND CAST(enfant.rang as int)>3 "
+				+ "order by pk_personne_id"
+
+
+
+Nécéssaire (
+suffisant -> Évènement -- mariage -> Pèriode -- année -> est contenu 1939:1945 
+suffisant -> Évènement -- naissance enfant -> Pèriode -- année -> est contenu 1939:1940 
+)
+
+
+problème avec le cast
+SELECT Distinct pk_personne_id
+FROM personne, familial_event
+WHERE familial_event.fk_personne_id=pk_personne_id
+AND (( CAST(familial_event.annee as int)>=1939 AND CAST(familial_event.annee as int)<=1945
+AND familial_event.type_event='Naissance enfant' )
+OR ( CAST(familial_event.annee as int)>=1939 AND CAST(familial_event.annee as int)<=1945
+AND familial_event.type_event='Mariage'))
+ORDER by pk_personne_id
+
+TODO
+ 
+ Nécéssaire -> Pèriode -- âge -> est contenu 3:12
+
+SELECT pk_personne_id
+FROM personne
+
+
+
+SELECT DISTINCT pk_personne_id 
+FROM personne, residential_episode 
+WHERE residential_episode.fk_personne_id=pk_personne_id AND ((cast(CASE WHEN residential_episode.date_debut != 'NA' THEN residential_episode.date_debut END as int)-cast(CASE WHEN personne.annee_naissance != 'NA' THEN personne.annee_naissance END as int))=20)AND (((cast(CASE WHEN residential_episode.date_debut != 'NA' THEN residential_episode.date_debut END as int)-cast(CASE WHEN personne.annee_naissance != 'NA' THEN personne.annee_naissance END as int))=7) 
+ORDER by pk_personne_id

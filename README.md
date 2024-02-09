@@ -5,9 +5,11 @@ Ce github représente le travail accompli au 5eme semestre de ma licence MIASHS 
  Le sujet du stage consiste à développer deux interfaces de requêtes sur un jeu de données
 de trajectoires de vie (ou parcours de vie) extrait de l’enquête Triple Biographie (3B) réalisées
 par l’INED et l’INSEE en 1981. Il s’agit plus précisément de :
+
 — Concevoir et développer une interface permettant de formuler des requêtes statistiques
 simples sur le jeu de données dans son intégralité (requêtes sur les méta-données) dis-
 ponibles à travers une base de données relationnelle
+
 — Concevoir et développer une interface permettant de formuler des requêtes agissant
 comme des filtres permettant d’extraire des données de ce jeu de données en combinant
 les caractéristiques temporelles, spatiales et thématiques des trajectoires de vie.
